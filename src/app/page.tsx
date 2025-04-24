@@ -1,7 +1,20 @@
-export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-8">
-      <h1 className="text-2xl font-bold">Bienvenido a mi aplicación</h1>
-    </main>
-  );
+'use client';
+
+import { useEffect } from 'react';
+import { useAuthStore } from '@/stores/auth';
+import { useRouter } from 'next/navigation';
+
+export default function HomePage() {
+  const token = useAuthStore((state) => state.token);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (token) {
+      router.replace('/dashboard');
+    } else {
+      router.replace('/auth');
+    }
+  }, [token, router]);
+
+  return null;
 }
