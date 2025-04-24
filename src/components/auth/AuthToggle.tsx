@@ -5,13 +5,13 @@ interface AuthToggleProps {
 
 export function AuthToggle({ activeTab, onToggle }: AuthToggleProps) {
   return (
-    <div className="flex w-full bg-gray-100 p-1 rounded-full">
+    <div className="flex w-full bg-gray-100 dark:bg-gray-700 p-1 rounded-full">
       <button
         onClick={() => onToggle('login')}
         className={`flex-1 py-2 px-4 rounded-full text-center transition-all ${
           activeTab === 'login'
             ? 'bg-[#1E88E5] text-white'
-            : 'bg-[#F5F5F5] text-[#757575]'
+            : 'bg-[#F5F5F5] dark:bg-gray-600 text-[#757575] dark:text-gray-300'
         }`}
       >
         Iniciar Sesión
@@ -21,7 +21,7 @@ export function AuthToggle({ activeTab, onToggle }: AuthToggleProps) {
         className={`flex-1 py-2 px-4 rounded-full text-center transition-all ${
           activeTab === 'register'
             ? 'bg-[#1E88E5] text-white'
-            : 'bg-[#F5F5F5] text-[#757575]'
+            : 'bg-[#F5F5F5] dark:bg-gray-600 text-[#757575] dark:text-gray-300'
         }`}
       >
         Registro

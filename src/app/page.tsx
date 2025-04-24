@@ -10,7 +10,7 @@ export default function HomePage() {
 
   useEffect(() => {
     if (token) {
-      router.replace('/dashboard');
+      router.replace('/home');
     } else {
       router.replace('/auth');
     }

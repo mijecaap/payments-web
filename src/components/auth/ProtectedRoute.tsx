@@ -20,7 +20,7 @@ export function ProtectedRoute({ children, requireAuth = true }: ProtectedRouteP
     }
 
     if (!requireAuth && token) {
-      router.replace('/dashboard');
+      router.replace('/home');
       return;
     }
   }, [token, requireAuth, router]);

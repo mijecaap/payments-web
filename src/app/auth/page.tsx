@@ -53,7 +53,7 @@ export default function AuthPage() {
       
       const responseData: LoginResponse = await res.json();
       login(responseData.access_token, responseData.user);
-      router.replace('/dashboard');
+      router.replace('/home');
     } catch (error) {
       throw error;
     }
@@ -76,8 +76,8 @@ export default function AuthPage() {
   return (
     <ProtectedRoute requireAuth={false}>
       <ErrorBoundary fallback={<div className="text-[#E53935] text-center">Error inesperado</div>}>
-        <div className="min-h-screen flex items-center justify-center bg-[#F5F5F5] py-12 px-4">
-          <div className="w-[400px] bg-white rounded-lg shadow-[0_4px_6px_rgba(0,0,0,0.1)] p-8">
+        <div className="min-h-screen flex items-center justify-center py-12 px-4">
+          <div className="w-[400px] bg-white dark:bg-gray-800 rounded-lg shadow-[0_4px_6px_rgba(0,0,0,0.1)] dark:shadow-[0_4px_6px_rgba(0,0,0,0.3)] p-8">
             <div className="text-center mb-8">
               <div className="w-16 h-16 mx-auto mb-4">
                 <Image
@@ -88,7 +88,7 @@ export default function AuthPage() {
                   className="w-full h-full object-contain"
                 />
               </div>
-              <h2 className="text-[18px] font-medium text-gray-900">
+              <h2 className="text-[18px] font-medium text-gray-900 dark:text-gray-100">
                 Bienvenido a BanexPay
               </h2>
             </div>
@@ -117,12 +117,12 @@ export default function AuthPage() {
                   <button
                     type="submit"
                     disabled={isLoginSubmitting}
-                    className="w-full h-12 bg-[#1E88E5] text-white font-semibold text-[16px] rounded-lg hover:bg-[#1976D2] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full h-12 bg-[#1E88E5] text-white font-semibold text-[16px] rounded-lg hover:bg-[#1976D2] transition-colors disabled:opacity-50 disabled:cursor-not-allowed dark:disabled:opacity-40"
                   >
                     {isLoginSubmitting ? 'Iniciando sesión...' : 'Iniciar Sesión'}
                   </button>
                   <div className="text-center mt-4">
-                    <a href="#" className="text-[14px] text-[#1E88E5] hover:underline">
+                    <a href="#" className="text-[14px] text-[#1E88E5] hover:underline dark:text-[#42A5F5] dark:hover:text-[#64B5F6]">
                       ¿Olvidaste tu contraseña?
                     </a>
                   </div>
@@ -164,7 +164,7 @@ export default function AuthPage() {
                   <button
                     type="submit"
                     disabled={isRegisterSubmitting}
-                    className="w-full h-12 bg-[#1E88E5] text-white font-semibold text-[16px] rounded-lg hover:bg-[#1976D2] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full h-12 bg-[#1E88E5] text-white font-semibold text-[16px] rounded-lg hover:bg-[#1976D2] transition-colors disabled:opacity-50 disabled:cursor-not-allowed dark:disabled:opacity-40"
                   >
                     {isRegisterSubmitting ? 'Creando cuenta...' : 'Crear Cuenta'}
                   </button>
