@@ -21,20 +21,20 @@ export function AccountCard({ refetch }: { refetch: () => void }) {
 
   return (
     <div className="w-full bg-white dark:bg-gray-800 rounded-xl shadow-sm dark:shadow-md p-6">
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-6 md:gap-0 mb-6">
         <div>
           <h3 className="text-base font-medium text-gray-600 dark:text-gray-400">
             Saldo Disponible
           </h3>
-          <p className="mt-2 text-4xl font-extrabold text-gray-900 dark:text-gray-100">
+          <p className="mt-2 text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-gray-100">
             {formatBalance(selectedAccount.balance)}
           </p>
         </div>
-        <div className="text-right">
+        <div className="md:text-right">
           <h3 className="text-base font-medium text-gray-600 dark:text-gray-400">
             Número de cuenta
           </h3>
-          <h2 className="mt-2 text-4xl font-bold text-gray-900 dark:text-gray-100">
+          <h2 className="mt-2 text-2xl md:text-4xl font-bold text-gray-900 dark:text-gray-100">
             {selectedAccount.accountNumber}
           </h2>
         </div>

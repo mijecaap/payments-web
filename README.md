@@ -2,6 +2,20 @@
 
 Frontend React (Next.js 14) para la app de pagos con referidos y sistema de comisiones.
 
+## 🚀 Demo
+
+Puedes probar la aplicación en vivo aquí: [https://payments-web-one.vercel.app/](https://payments-web-one.vercel.app/)
+
+### Usuarios de prueba
+
+Puedes utilizar cualquiera de los siguientes usuarios para probar la aplicación:
+
+| Email | Contraseña |
+|-------|------------|
+| juan@ejemplo.com | password123 |
+| maria@ejemplo.com | password123 |
+| carlos@ejemplo.com | password123 |
+
 ## 🗺️ Contenido
 1. [Stack](#stack)
 2. [Requisitos](#requisitos)
