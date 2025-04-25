@@ -4,7 +4,7 @@ import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
-interface ProtectedRouteProps {
+export interface ProtectedRouteProps {
   children: React.ReactNode;
   requireAuth?: boolean;
 }
@@ -14,19 +14,12 @@ export function ProtectedRoute({ children, requireAuth = true }: ProtectedRouteP
   const router = useRouter();
 
   useEffect(() => {
-    if (requireAuth && !token) {
+    // Verifica si el token existe y si la ruta requiere autenticación
+    // Si no hay token y la ruta requiere autenticación, redirige a la página de inicio de sesión
+    if (!token && requireAuth) {
       router.replace('/auth');
-      return;
     }
-
-    if (!requireAuth && token) {
-      router.replace('/home');
-      return;
-    }
-  }, [token, requireAuth, router]);
-
-  if (requireAuth && !token) return null;
-  if (!requireAuth && token) return null;
+  }, [token, router, requireAuth]);
 
   return <>{children}</>;
 }

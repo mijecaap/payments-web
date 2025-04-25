@@ -10,13 +10,8 @@ interface FormInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement
 
 export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
   ({ label, error, icon, placeholder, ...props }, ref) => {
-    const Icon = icon === 'mail' 
-      ? MdEmail 
-      : icon === 'lock' 
-      ? MdLock 
-      : icon === 'user' 
-      ? MdPerson 
-      : null;
+    const Icon =
+      icon === 'mail' ? MdEmail : icon === 'lock' ? MdLock : icon === 'user' ? MdPerson : null;
 
     return (
       <div className="w-full">
@@ -42,5 +37,7 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
         {error && <p className="mt-1 text-[14px] text-[#E53935]">{error}</p>}
       </div>
     );
-  }
+  },
 );
+
+FormInput.displayName = 'FormInput';
