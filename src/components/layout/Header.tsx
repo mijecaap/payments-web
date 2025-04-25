@@ -34,13 +34,10 @@ export function Header() {
           >
             <MdAccountBalance className="w-5 h-5" />
           </button>
-          
+
           {showAccountSelect && (
             <>
-              <div 
-                className="fixed inset-0 z-40"
-                onClick={() => setShowAccountSelect(false)}
-              />
+              <div className="fixed inset-0 z-40" onClick={() => setShowAccountSelect(false)} />
               <div className="absolute right-0 mt-2 w-72 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-100 dark:border-gray-700 z-50">
                 <div className="p-2">
                   <AccountSelect />

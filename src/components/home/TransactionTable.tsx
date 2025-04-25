@@ -91,15 +91,11 @@ export function TransactionTable({ transactions, isLoading }: TransactionTablePr
                 </div>
                 <div className="flex justify-between items-center pt-2">
                   <div className="space-y-1">
-                    <p className="text-sm font-medium text-gray-900 dark:text-white">
-                      Monto
-                    </p>
+                    <p className="text-sm font-medium text-gray-900 dark:text-white">Monto</p>
                     {getAmountDisplay(transaction.amount)}
                   </div>
                   <div className="text-right space-y-1">
-                    <p className="text-sm font-medium text-gray-900 dark:text-white">
-                      Comisión
-                    </p>
+                    <p className="text-sm font-medium text-gray-900 dark:text-white">Comisión</p>
                     <span className="text-sm text-gray-600 dark:text-gray-300">
                       {formatBalance(transaction.commission)}
                     </span>
@@ -130,9 +126,7 @@ export function TransactionTable({ transactions, isLoading }: TransactionTablePr
                   <td className="px-6 py-4 whitespace-nowrap">
                     {new Date(transaction.date).toLocaleDateString()}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {transaction.contactName}
-                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">{transaction.contactName}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-right">
                     {getAmountDisplay(transaction.amount)}
                   </td>

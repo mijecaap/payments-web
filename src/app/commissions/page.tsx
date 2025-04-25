@@ -24,22 +24,14 @@ export default function CommissionsPage() {
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm">
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-              Comisiones
-            </h1>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Comisiones</h1>
             <div className="text-sm text-gray-500 dark:text-gray-400">
               Total: ${totalCommissions.toFixed(2)}
             </div>
           </div>
-          <CommissionTable
-            commissions={commissions}
-            isLoading={isLoading}
-          />
+          <CommissionTable commissions={commissions} isLoading={isLoading} />
           {hasMore && (
-            <div
-              ref={ref}
-              className="p-4 text-center text-sm text-gray-500 dark:text-gray-400"
-            >
+            <div ref={ref} className="p-4 text-center text-sm text-gray-500 dark:text-gray-400">
               Cargando más transacciones...
             </div>
           )}

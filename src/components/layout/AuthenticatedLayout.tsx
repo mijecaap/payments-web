@@ -12,9 +12,7 @@ export function AuthenticatedLayout({ children }: AuthenticatedLayoutProps) {
       <div className="lg:ml-60">
         <Header />
         <main className="p-4 lg:p-6">
-          <div className="max-w-[1200px] mx-auto space-y-6">
-            {children}
-          </div>
+          <div className="max-w-[1200px] mx-auto space-y-6">{children}</div>
         </main>
       </div>
     </div>

@@ -20,7 +20,7 @@ export function Sidebar() {
   return (
     <>
       {/* Botón de menú móvil */}
-      <button 
+      <button
         onClick={toggleSidebar}
         className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-white dark:bg-gray-800 shadow-sm"
       >
@@ -29,14 +29,12 @@ export function Sidebar() {
 
       {/* Overlay para móvil */}
       {isOpen && (
-        <div 
-          className="lg:hidden fixed inset-0 bg-black/50 z-30"
-          onClick={toggleSidebar}
-        />
+        <div className="lg:hidden fixed inset-0 bg-black/50 z-30" onClick={toggleSidebar} />
       )}
 
       {/* Sidebar */}
-      <aside className={`fixed top-0 left-0 h-screen bg-white dark:bg-gray-800 shadow-sm border-r border-gray-100 dark:border-gray-700 transition-transform duration-300 z-40
+      <aside
+        className={`fixed top-0 left-0 h-screen bg-white dark:bg-gray-800 shadow-sm border-r border-gray-100 dark:border-gray-700 transition-transform duration-300 z-40
         ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
         w-[280px] lg:w-60`}
       >

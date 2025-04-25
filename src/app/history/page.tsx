@@ -26,15 +26,9 @@ export default function HistoryPage() {
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
             Historial de Transacciones
           </h1>
-          <TransactionTable
-            transactions={transactions}
-            isLoading={isLoading}
-          />
+          <TransactionTable transactions={transactions} isLoading={isLoading} />
           {hasMore && (
-            <div
-              ref={ref}
-              className="p-4 text-center text-sm text-gray-500 dark:text-gray-400"
-            >
+            <div ref={ref} className="p-4 text-center text-sm text-gray-500 dark:text-gray-400">
               Cargando más transacciones...
             </div>
           )}

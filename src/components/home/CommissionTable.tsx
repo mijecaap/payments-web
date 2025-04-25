@@ -52,10 +52,7 @@ export function CommissionTable({ commissions, isLoading }: CommissionTableProps
       {isMobile ? (
         <div className="space-y-4">
           {commissions.map((commission) => (
-            <div
-              key={commission.id}
-              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm"
-            >
+            <div key={commission.id} className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm">
               <div className="space-y-3">
                 <p className="text-xs text-gray-500 dark:text-gray-400">
                   {new Date(commission.date).toLocaleDateString()}
@@ -85,9 +82,7 @@ export function CommissionTable({ commissions, isLoading }: CommissionTableProps
                   </div>
                 </div>
                 <div className="pt-2 flex justify-between items-center border-t border-gray-100 dark:border-gray-700">
-                  <span className="text-sm text-gray-500 dark:text-gray-400">
-                    Comisión
-                  </span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">Comisión</span>
                   <span className="font-medium text-emerald-600 dark:text-emerald-400">
                     {formatBalance(commission.amount.toString())}
                   </span>
@@ -118,12 +113,8 @@ export function CommissionTable({ commissions, isLoading }: CommissionTableProps
                   <td className="px-6 py-4 whitespace-nowrap">
                     {new Date(commission.date).toLocaleDateString()}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {commission.originUserName}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {commission.originAccountNumber}
-                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">{commission.originUserName}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{commission.originAccountNumber}</td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {formatBalance(commission.transactionAmount.toString())}
                   </td>
