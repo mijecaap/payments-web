@@ -1,6 +1,5 @@
 'use client';
-import { Sidebar } from '@/components/layout/Sidebar';
-import { Header } from '@/components/layout/Header';
+import { AuthenticatedLayout } from '@/components/layout/AuthenticatedLayout';
 import { AccountCard } from '@/components/home/AccountCard';
 import { useTransactions } from '@/hooks/useTransactions';
 import { useCommissions } from '@/hooks/useCommissions';
@@ -28,26 +27,18 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen flex bg-gray-50 dark:bg-gray-900">
-      <Sidebar />
-      <div className="flex-1 ml-60">
-        <Header />
-        <main className="p-6">
-          <div className="max-w-[1200px] mx-auto space-y-6">
-            <div className="grid grid-cols-12 gap-6">
-              <div className="col-span-12">
-                <AccountCard refetch={refetch} />
-              </div>
-            </div>
-            <ActivityTabs
-              transactions={transactions}
-              commissions={commissions}
-              totalCommissions={totalCommissions}
-              isLoading={isLoading}
-            />
-          </div>
-        </main>
+    <AuthenticatedLayout>
+      <div className="grid grid-cols-12 gap-6">
+        <div className="col-span-12">
+          <AccountCard refetch={refetch} />
+        </div>
       </div>
-    </div>
+      <ActivityTabs
+        transactions={transactions}
+        commissions={commissions}
+        totalCommissions={totalCommissions}
+        isLoading={isLoading}
+      />
+    </AuthenticatedLayout>
   );
 }

@@ -4,8 +4,7 @@ import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { TransactionTable } from '@/components/home/TransactionTable';
 import { useInfiniteTransactions } from '@/hooks/useInfiniteTransactions';
-import { Sidebar } from '@/components/layout/Sidebar';
-import { Header } from '@/components/layout/Header';
+import { AuthenticatedLayout } from '@/components/layout/AuthenticatedLayout';
 import { useAuth } from '@/hooks/useAuth';
 
 export default function HistoryPage() {
@@ -21,32 +20,26 @@ export default function HistoryPage() {
   }, [inView, hasMore, isLoading]);
 
   return (
-    <div className="min-h-screen flex bg-gray-50 dark:bg-gray-900">
-      <Sidebar />
-      <div className="flex-1 ml-60">
-        <Header />
-        <main className="p-6">
-          <div className="max-w-[1200px] mx-auto space-y-6">
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm">
-              <div className="p-6">
-                <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                  Historial de Transacciones
-                </h1>
-                <TransactionTable transactions={transactions} isLoading={isLoading} />
-
-                {hasMore && (
-                  <div
-                    ref={ref}
-                    className="p-4 text-center text-sm text-gray-500 dark:text-gray-400"
-                  >
-                    Cargando más transacciones...
-                  </div>
-                )}
-              </div>
+    <AuthenticatedLayout>
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm">
+        <div className="p-6">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+            Historial de Transacciones
+          </h1>
+          <TransactionTable
+            transactions={transactions}
+            isLoading={isLoading}
+          />
+          {hasMore && (
+            <div
+              ref={ref}
+              className="p-4 text-center text-sm text-gray-500 dark:text-gray-400"
+            >
+              Cargando más transacciones...
             </div>
-          </div>
-        </main>
+          )}
+        </div>
       </div>
-    </div>
+    </AuthenticatedLayout>
   );
 }

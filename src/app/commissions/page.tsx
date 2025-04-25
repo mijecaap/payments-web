@@ -4,8 +4,7 @@ import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { CommissionTable } from '@/components/home/CommissionTable';
 import { useInfiniteCommissions } from '@/hooks/useInfiniteCommissions';
-import { Sidebar } from '@/components/layout/Sidebar';
-import { Header } from '@/components/layout/Header';
+import { AuthenticatedLayout } from '@/components/layout/AuthenticatedLayout';
 import { useAuth } from '@/hooks/useAuth';
 
 export default function CommissionsPage() {
@@ -21,32 +20,31 @@ export default function CommissionsPage() {
   }, [inView, hasMore, isLoading]);
 
   return (
-    <div className="min-h-screen flex bg-gray-50 dark:bg-gray-900">
-      <Sidebar />
-      <div className="flex-1 ml-60">
-        <Header />
-        <main className="p-6">
-          <div className="max-w-[1200px] mx-auto space-y-6">
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm">
-              <div className="p-6">
-                <div className="flex justify-between items-center mb-6">
-                  <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-                    Historial de Comisiones
-                  </h1>
-                  {totalCommissions > 0 && (
-                    <div className="text-lg font-semibold text-emerald-600 dark:text-emerald-400">
-                      Total: {totalCommissions}
-                    </div>
-                  )}
-                </div>
-                <CommissionTable commissions={commissions} isLoading={isLoading} />
-                {/* Elemento observado para infinite scroll */}
-                {!isLoading && hasMore && <div ref={ref} className="h-10" />}
-              </div>
+    <AuthenticatedLayout>
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm">
+        <div className="p-6">
+          <div className="flex justify-between items-center mb-6">
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+              Comisiones
+            </h1>
+            <div className="text-sm text-gray-500 dark:text-gray-400">
+              Total: ${totalCommissions.toFixed(2)}
             </div>
           </div>
-        </main>
+          <CommissionTable
+            commissions={commissions}
+            isLoading={isLoading}
+          />
+          {hasMore && (
+            <div
+              ref={ref}
+              className="p-4 text-center text-sm text-gray-500 dark:text-gray-400"
+            >
+              Cargando más transacciones...
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </AuthenticatedLayout>
   );
 }
