@@ -1,107 +1,127 @@
+'use client';
 import { useState } from 'react';
-
-const contacts = [
-  { id: 1, name: 'Ana García', avatar: 'AG', count: 12 },
-  { id: 2, name: 'Carlos López', avatar: 'CL', count: 8 },
-  { id: 3, name: 'María Torres', avatar: 'MT', count: 15 },
-  { id: 4, name: 'Juan Pérez', avatar: 'JP', count: 5 },
-  { id: 5, name: 'Laura Díaz', avatar: 'LD', count: 10 },
-];
-
-const transactions = [
-  { id: 1, amount: 250, commission: 2.50, date: '2025-04-24', type: 'sent', counterparty: 'Ana García' },
-  { id: 2, amount: 180, commission: 1.80, date: '2025-04-23', type: 'received', counterparty: 'Carlos López' },
-  { id: 3, amount: 450, commission: 4.50, date: '2025-04-22', type: 'sent', counterparty: 'María Torres' },
-];
+import { formatBalance } from '@/utils/format';
+import { Transaction } from '@/types/transactions';
+import { Commission } from '@/types/commissions';
+import { CommissionTable } from './CommissionTable';
+import { TransactionTable } from './TransactionTable';
+import { useFrequentContacts } from '@/hooks/useFrequentContacts';
+import { ContactCard } from './ContactCard';
+import Link from 'next/link';
 
 type TabOption = 'contacts' | 'history' | 'commissions';
 
-export function ActivityTabs() {
+interface ActivityTabsProps {
+  transactions: Transaction[];
+  commissions: Commission[];
+  isLoading: boolean;
+  totalCommissions?: number;
+}
+
+export function ActivityTabs({
+  transactions,
+  commissions,
+  isLoading,
+  totalCommissions = 0,
+}: ActivityTabsProps) {
   const [activeTab, setActiveTab] = useState<TabOption>('contacts');
+  const { contacts, isLoading: isLoadingContacts } = useFrequentContacts();
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm dark:shadow-md">
-      <div className="border-b border-gray-100 dark:border-gray-700">
-        <nav className="flex gap-8 px-6" aria-label="Tabs">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm">
+      <div className="border-b border-gray-200 dark:border-gray-700">
+        <nav className="flex space-x-8 px-6" aria-label="Tabs">
           <button
             onClick={() => setActiveTab('contacts')}
-            className={`py-4 text-sm font-medium border-b-2 ${
+            className={`py-4 px-1 inline-flex items-center border-b-2 font-medium text-sm ${
               activeTab === 'contacts'
-                ? 'border-[#1E88E5] text-[#1E88E5] dark:text-[#42A5F5]'
-                : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
             }`}
           >
             Contactos Frecuentes
           </button>
           <button
             onClick={() => setActiveTab('history')}
-            className={`py-4 text-sm font-medium border-b-2 ${
+            className={`py-4 px-1 inline-flex items-center border-b-2 font-medium text-sm ${
               activeTab === 'history'
-                ? 'border-[#1E88E5] text-[#1E88E5] dark:text-[#42A5F5]'
-                : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
             }`}
           >
             Historial
           </button>
           <button
             onClick={() => setActiveTab('commissions')}
-            className={`py-4 text-sm font-medium border-b-2 ${
+            className={`py-4 px-1 inline-flex items-center border-b-2 font-medium text-sm ${
               activeTab === 'commissions'
-                ? 'border-[#1E88E5] text-[#1E88E5] dark:text-[#42A5F5]'
-                : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
             }`}
           >
-            Comisiones
+            Comisiones {totalCommissions > 0 && `(${formatBalance(totalCommissions.toString())})`}
           </button>
         </nav>
       </div>
 
       <div className="p-6">
         {activeTab === 'contacts' && (
-          <div className="flex gap-4 overflow-x-auto pb-4">
-            {contacts.map((contact) => (
-              <div
-                key={contact.id}
-                className="flex flex-col items-center p-4 min-w-[120px] bg-gray-50 dark:bg-gray-700 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors cursor-pointer"
-              >
-                <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#1E88E5] text-white font-medium">
-                  {contact.avatar}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {isLoadingContacts ? (
+              Array.from({ length: 6 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg animate-pulse"
+                >
+                  <div className="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-600" />
+                  <div className="space-y-2 flex-1">
+                    <div className="h-4 bg-gray-200 dark:bg-gray-600 rounded w-3/4" />
+                    <div className="h-3 bg-gray-200 dark:bg-gray-600 rounded w-1/2" />
+                  </div>
                 </div>
-                <p className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100 text-center">
-                  {contact.name}
-                </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">{contact.count} transf.</p>
+              ))
+            ) : contacts.length > 0 ? (
+              contacts.map((contact) => (
+                <ContactCard
+                  key={contact.id}
+                  id={contact.id}
+                  name={contact.name}
+                  description={`${contact.transactionCount} transacciones`}
+                />
+              ))
+            ) : (
+              <div className="col-span-full text-center py-8 text-gray-500 dark:text-gray-400">
+                No hay contactos frecuentes
               </div>
-            ))}
+            )}
           </div>
         )}
 
-        {(activeTab === 'history' || activeTab === 'commissions') && (
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-100 dark:divide-gray-700">
-              <thead>
-                <tr className="text-left text-xs font-medium text-gray-500 dark:text-gray-400">
-                  <th className="px-4 py-2">Monto</th>
-                  <th className="px-4 py-2">Comisión</th>
-                  <th className="px-4 py-2">Fecha</th>
-                  <th className="px-4 py-2">Origen/Destino</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
-                {transactions.map((tx) => (
-                  <tr key={tx.id} className="text-sm">
-                    <td className="px-4 py-3 font-medium text-gray-900 dark:text-gray-100">
-                      {tx.type === 'sent' ? '-' : '+'} S/ {tx.amount.toFixed(2)}
-                    </td>
-                    <td className="px-4 py-3 text-gray-500 dark:text-gray-400">
-                      S/ {tx.commission.toFixed(2)}
-                    </td>
-                    <td className="px-4 py-3 text-gray-500 dark:text-gray-400">{tx.date}</td>
-                    <td className="px-4 py-3 text-gray-900 dark:text-gray-100">{tx.counterparty}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        {activeTab === 'history' && (
+          <div className="space-y-4">
+            <TransactionTable transactions={transactions} isLoading={isLoading} />
+            <div className="flex justify-center">
+              <Link
+                href="/history"
+                className="inline-flex items-center px-4 py-2 text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+              >
+                Ver más
+              </Link>
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'commissions' && (
+          <div className="space-y-4">
+            <CommissionTable commissions={commissions} isLoading={isLoading} />
+            <div className="flex justify-center">
+              <Link
+                href="/commissions"
+                className="inline-flex items-center px-4 py-2 text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+              >
+                Ver más
+              </Link>
+            </div>
           </div>
         )}
       </div>
