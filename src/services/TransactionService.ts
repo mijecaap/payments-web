@@ -6,10 +6,10 @@ export class TransactionService {
     accountId: number,
     page: number = 1,
   ): Promise<TransactionResponse> {
-    return ServiceFetcher.get(`/transactions/${accountId}?page=${page}`);
+    return ServiceFetcher.get(`/transactions/history/${accountId}?page=${page}`);
   }
 
   static async transfer(data: TransferRequest): Promise<TransferResponse> {
-    return ServiceFetcher.post('/transactions/transfer', data);
+    return ServiceFetcher.post('/transactions', data);
   }
 }

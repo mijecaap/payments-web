@@ -48,7 +48,7 @@ export function TransferForm({ refetchTransactions }: { refetchTransactions: () 
 
     try {
       setIsSubmitting(true);
-      const response = await TransactionService.createTransfer({
+      const response = await TransactionService.transfer({
         originAccountId: selectedAccount.id,
         destinationAccountNumber: data.accountNumber,
         amount: data.amount,
